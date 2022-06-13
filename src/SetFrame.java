@@ -25,8 +25,8 @@ public class SetFrame implements ActionListener{
 
 
         JLabel creditsLabel = new JLabel("Credits:");
-        creditsLabel.setBounds(10,5,100,20);
-        frame.add(creditsLabel);
+        creditsLabel.setBounds(20,10,100,20);
+        panel.add(creditsLabel);
 
         for(int i = 0; i < grades.length; i++){
             grades[i] = new JTextField();
@@ -121,11 +121,15 @@ public class SetFrame implements ActionListener{
             panel.add(removeClass[i]);
         }
 
+        JTabbedPane pane = new JTabbedPane();
+        pane.addTab("GPA-Calc", panel);
+        pane.addTab("Grade-Calc", new GradeCalculator());
+        //pane.add(panel);
         panel.add(gpaButton);
         panel.add(gpaOutput);
         panel.add(clearText);
-        frame.add(panel);
-        frame.setSize(450,650);
+        frame.add(pane);
+        frame.setSize(450,660);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
