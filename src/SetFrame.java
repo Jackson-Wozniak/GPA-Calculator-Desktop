@@ -27,33 +27,13 @@ public class SetFrame implements ActionListener{
         JLabel creditsLabel = new JLabel("Credits:");
         creditsLabel.setBounds(10,5,100,20);
         frame.add(creditsLabel);
-        /*JTextField class1 = new JTextField();
-        JTextField class2 = new JTextField();
-        JTextField class3 = new JTextField();
-        JTextField class4 = new JTextField();
-        JTextField class5 = new JTextField();
-        grades[0] = class1;
-        grades[1] = class2;
-        grades[2] = class3;
-        grades[3] = class4;
-        grades[4] = class5;*/
+
         for(int i = 0; i < grades.length; i++){
             grades[i] = new JTextField();
             grades[i].setBounds(10, 30 + (70 * i), 230, 60);
         }
 
         JComboBox<?>[] listOfGrades = new JComboBox[5];
-        /*JComboBox<String> grade1 = new JComboBox<>(grade);
-        JComboBox<String> grade2 = new JComboBox<>(grade);
-        JComboBox<String> grade3 = new JComboBox<>(grade);
-        JComboBox<String> grade4 = new JComboBox<>(grade);
-        JComboBox<String> grade5 = new JComboBox<>(grade);
-        listOfGrades[0] = grade1;
-        listOfGrades[1] = grade2;
-        listOfGrades[2] = grade3;
-        listOfGrades[3] = grade4;
-        listOfGrades[4] = grade5;*/
-
         for(int i = 0; i < listOfGrades.length; i++){
             listOfGrades[i] = new JComboBox<>(grade);
             listOfGrades[i].setBounds(250, 30 + (70 * i), 100, 60);
@@ -69,18 +49,6 @@ public class SetFrame implements ActionListener{
         gpaOutput.setBorderPainted(false);
         gpaOutput.setFocusable(false);
 
-
-
-        /*JButton removeClass1 = new JButton("X");
-        JButton removeClass2 = new JButton("X");
-        JButton removeClass3 = new JButton("X");
-        JButton removeClass4 = new JButton("X");
-        JButton removeClass5 = new JButton("X");
-        removeClass[0] = removeClass1;
-        removeClass[1] = removeClass2;
-        removeClass[2] = removeClass3;
-        removeClass[3] = removeClass4;
-        removeClass[4] = removeClass5;*/
         for(int i = 0; i < 5; i++){
             removeClass[i] = new JButton("X");
             removeClass[i].setBounds(360, 30 + (70 * i), 60, 60);
@@ -112,9 +80,13 @@ public class SetFrame implements ActionListener{
             }
 
 
-
             double finalGPA = gpaSum / classNumber;
-            gpaOutput.setText(String.valueOf(finalGPA)); //Tell the user the final GPA
+            if(finalGPA > 0){
+                gpaOutput.setText(String.valueOf(Math.round(finalGPA * 10.00) /10.00));
+            }else{
+                gpaOutput.setText("Invalid GPA");
+            }
+
             //set the background to a color based on the grade
             if(finalGPA >= 3.5){
                 gpaOutput.setBackground(LightGreen);
