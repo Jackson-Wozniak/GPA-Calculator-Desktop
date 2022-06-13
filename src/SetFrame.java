@@ -53,6 +53,7 @@ public class SetFrame implements ActionListener{
         listOfGrades[2] = grade3;
         listOfGrades[3] = grade4;
         listOfGrades[4] = grade5;*/
+
         for(int i = 0; i < listOfGrades.length; i++){
             listOfGrades[i] = new JComboBox<>(grade);
             listOfGrades[i].setBounds(250, 30 + (70 * i), 100, 60);
