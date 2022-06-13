@@ -24,8 +24,10 @@ public class SetFrame implements ActionListener{
         Color Red = new Color(255,0,0);
 
 
-
-        JTextField class1 = new JTextField();
+        JLabel creditsLabel = new JLabel("Credits:");
+        creditsLabel.setBounds(10,5,100,20);
+        frame.add(creditsLabel);
+        /*JTextField class1 = new JTextField();
         JTextField class2 = new JTextField();
         JTextField class3 = new JTextField();
         JTextField class4 = new JTextField();
@@ -34,13 +36,14 @@ public class SetFrame implements ActionListener{
         grades[1] = class2;
         grades[2] = class3;
         grades[3] = class4;
-        grades[4] = class5;
+        grades[4] = class5;*/
         for(int i = 0; i < grades.length; i++){
-            grades[i].setBounds(10, 10 + (70 * i), 230, 60);
+            grades[i] = new JTextField();
+            grades[i].setBounds(10, 30 + (70 * i), 230, 60);
         }
 
-        JComboBox[] listOfGrades = new JComboBox[5];
-        JComboBox<String> grade1 = new JComboBox<>(grade);
+        JComboBox<?>[] listOfGrades = new JComboBox[5];
+        /*JComboBox<String> grade1 = new JComboBox<>(grade);
         JComboBox<String> grade2 = new JComboBox<>(grade);
         JComboBox<String> grade3 = new JComboBox<>(grade);
         JComboBox<String> grade4 = new JComboBox<>(grade);
@@ -49,16 +52,17 @@ public class SetFrame implements ActionListener{
         listOfGrades[1] = grade2;
         listOfGrades[2] = grade3;
         listOfGrades[3] = grade4;
-        listOfGrades[4] = grade5;
+        listOfGrades[4] = grade5;*/
         for(int i = 0; i < listOfGrades.length; i++){
-            listOfGrades[i].setBounds(250, 10 + (70 * i), 100, 60);
+            listOfGrades[i] = new JComboBox<>(grade);
+            listOfGrades[i].setBounds(250, 30 + (70 * i), 100, 60);
             listOfGrades[i].setFocusable(false);
         }
 
 
 
         JButton gpaOutput = new JButton();
-        gpaOutput.setBounds(70,410,200,100);
+        gpaOutput.setBounds(70,440,200,100);
         gpaOutput.setFont(bigFont);
         gpaOutput.setBackground(Color.WHITE);
         gpaOutput.setBorderPainted(false);
@@ -66,7 +70,7 @@ public class SetFrame implements ActionListener{
 
 
 
-        JButton removeClass1 = new JButton("X");
+        /*JButton removeClass1 = new JButton("X");
         JButton removeClass2 = new JButton("X");
         JButton removeClass3 = new JButton("X");
         JButton removeClass4 = new JButton("X");
@@ -75,16 +79,17 @@ public class SetFrame implements ActionListener{
         removeClass[1] = removeClass2;
         removeClass[2] = removeClass3;
         removeClass[3] = removeClass4;
-        removeClass[4] = removeClass5;
+        removeClass[4] = removeClass5;*/
         for(int i = 0; i < 5; i++){
-            removeClass[i].setBounds(360, 10 + (70 * i), 60, 60);
+            removeClass[i] = new JButton("X");
+            removeClass[i].setBounds(360, 30 + (70 * i), 60, 60);
             removeClass[i].setFocusable(false);
             removeClass[i].addActionListener(this);
 
         }
 
         JButton gpaButton = new JButton("Calculate GPA");
-        gpaButton.setBounds(70,360,200,40);
+        gpaButton.setBounds(70,390,200,40);
         gpaButton.setFocusable(false);
         gpaButton.addActionListener(e -> {
             double gpaSum = 0;
@@ -98,9 +103,9 @@ public class SetFrame implements ActionListener{
                     CalculateGPA math = new CalculateGPA(credits[i], gpa[i]);
                     gpaSum += math.getGpaPerClass(gpa[i]);
                     classNumber++;
-                }else if(isClassRemoved[i]){
+                }/*else if(isClassRemoved[i]){
 
-                }else{
+                }*/else{
                     grades[i].setText("Make sure your input is valid!");
                 }
             }
@@ -129,7 +134,7 @@ public class SetFrame implements ActionListener{
 
 
         JButton clearText = new JButton("Clear Text");
-        clearText.setBounds(120,515,100,40);
+        clearText.setBounds(120,545,100,40);
         clearText.setFocusable(false);
         clearText.addActionListener(e -> {
             for (JTextField jTextField : grades) {
@@ -147,7 +152,7 @@ public class SetFrame implements ActionListener{
         panel.add(gpaOutput);
         panel.add(clearText);
         frame.add(panel);
-        frame.setSize(450,600);
+        frame.setSize(450,650);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
