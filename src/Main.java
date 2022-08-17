@@ -9,7 +9,6 @@ public class Main extends SetFrame{
         catch (Exception e) {
             System.out.println("Look and Feel not set");
         }
-        SetFrame frame = new SetFrame();
-        frame.setFrame();
+        new SetFrame();
     }
 }

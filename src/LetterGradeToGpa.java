@@ -1,15 +1,7 @@
-public class CalculateGPA {
-    private double credits1;
-    private int index;
-    //private double gpa;
-
-    public CalculateGPA(double credits1, int index){
-        this.credits1 = credits1;
-        this.index = index;
-    }
+public class LetterGradeToGpa {
 
     //convert index of combo box to grade(i.e index 0 at "A" = 4.0 gpa etc)
-    public double getGpaPerClass(int index){
+    public static double getGpaPerClass(int index){
         double gpa;
         switch (index) {
             case 0 -> {
