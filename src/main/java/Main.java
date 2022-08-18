@@ -1,4 +1,4 @@
-package main;
+import components.SetFrame;
 
 import javax.swing.*;
 

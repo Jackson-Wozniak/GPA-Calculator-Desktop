@@ -1,7 +1,4 @@
-package main;
-
-import panels.GpaCalculatorPanel;
-import panels.GradeCalculator;
+package components;
 
 import javax.swing.*;
 

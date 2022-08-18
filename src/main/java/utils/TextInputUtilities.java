@@ -5,7 +5,7 @@ import javax.swing.*;
 public class TextInputUtilities {
 
     public static boolean isTextFieldValidNumber(JTextField jTextField){
-        return jTextField.getText().equals("") || !isTextInputNumber(jTextField);
+        return !jTextField.getText().equals("") || isTextInputNumber(jTextField);
     }
 
     public static boolean isTextInputNumber(JTextField jTextField){

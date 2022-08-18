@@ -1,4 +1,4 @@
-package panels;
+package components;
 
 import utils.CustomColors;
 import utils.TextInputUtilities;
@@ -20,7 +20,10 @@ public class GpaCalculatorPanel extends JPanel implements ActionListener{
 
     public GpaCalculatorPanel(){
         this.setLayout(null);
+        setPanelComponents();
+    }
 
+    public void setPanelComponents(){
         JLabel creditsLabel = new JLabel("Credits:");
         creditsLabel.setBounds(20,10,100,20);
         this.add(creditsLabel);
@@ -62,7 +65,7 @@ public class GpaCalculatorPanel extends JPanel implements ActionListener{
                 if (isClassRemoved[i]){
                     continue;
                 }
-                if(TextInputUtilities.isTextFieldValidNumber(classCredits[i])){
+                if(!TextInputUtilities.isTextFieldValidNumber(classCredits[i])){
                     JOptionPane.showMessageDialog(
                             new JFrame(), "All fields must be valid numbers");
                     return;
