@@ -1,6 +1,8 @@
+package main;
+
 import javax.swing.*;
 
-public class Main extends SetFrame{
+public class Main extends SetFrame {
     public static void main(String[] args) {
         try {
 

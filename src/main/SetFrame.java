@@ -1,3 +1,8 @@
+package main;
+
+import panels.GpaCalculatorPanel;
+import panels.GradeCalculator;
+
 import javax.swing.*;
 
 public class SetFrame extends JFrame{

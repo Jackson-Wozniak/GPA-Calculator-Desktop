@@ -1,3 +1,8 @@
+package panels;
+
+import utils.CustomColors;
+import utils.TextInputUtilities;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,23 +10,24 @@ import java.text.DecimalFormat;
 
 public class GpaCalculatorPanel extends JPanel implements ActionListener{
 
-    JButton[] removeClass = new JButton[5];
-    JTextField[] grades = new JTextField[5];
-    boolean[] isClassRemoved = new boolean[5];
+    private final JButton[] removeClass = new JButton[5];
+    private final JTextField[] classCredits = new JTextField[5];
+    private final boolean[] isClassRemoved = new boolean[5];
     final String[] letterGrade = {"A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D+", "D", "F"};
+    final DecimalFormat decimalFormat = new DecimalFormat("0.00");
+    final Font bigFont = new Font("Serif", Font.BOLD, 28);
+
 
     public GpaCalculatorPanel(){
         this.setLayout(null);
-
-        Font bigFont = new Font("Serif", Font.BOLD, 28);
 
         JLabel creditsLabel = new JLabel("Credits:");
         creditsLabel.setBounds(20,10,100,20);
         this.add(creditsLabel);
 
-        for(int i = 0; i < grades.length; i++){
-            grades[i] = new JTextField();
-            grades[i].setBounds(10, 30 + (70 * i), 230, 60);
+        for(int i = 0; i < classCredits.length; i++){
+            classCredits[i] = new JTextField();
+            classCredits[i].setBounds(10, 30 + (70 * i), 230, 60);
         }
 
         JComboBox<?>[] listOfGrades = new JComboBox[5];
@@ -53,21 +59,27 @@ public class GpaCalculatorPanel extends JPanel implements ActionListener{
             int totalCredits = 0;
             double weightedGpa = 0;
             for(int i = 0; i < 5; i++) {
-                if (!isClassRemoved[i] && !grades[i].getText().equals("") && Integer.parseInt(grades[i].getText()) > 0 ) {
-                    weightedGpa += (LetterGradeToGpa.getGpaPerClass(listOfGrades[i].getSelectedIndex())
-                            * Double.parseDouble(grades[i].getText()));
-                    totalCredits += Double.parseDouble(grades[i].getText());
+                if (isClassRemoved[i]){
                     continue;
                 }
-                JOptionPane.showMessageDialog(new JFrame(), "all fields must be valid numbers");
-                return;
+                if(TextInputUtilities.isTextFieldValidNumber(classCredits[i])){
+                    JOptionPane.showMessageDialog(
+                            new JFrame(), "All fields must be valid numbers");
+                    return;
+                }
+
+                double classCredit = TextInputUtilities.turnTextFieldInputIntoDouble(classCredits[i]);
+                totalCredits += classCredit;
+                weightedGpa += TextInputUtilities.calculatedWeightedGpaOfClass(
+                        listOfGrades[i].getSelectedIndex(),
+                        classCredit);
             }
+
             double finalGPA = weightedGpa / totalCredits;
             if(finalGPA < 0){
                 gpaOutput.setText("Invalid GPA");
                 return;
             }
-            DecimalFormat decimalFormat = new DecimalFormat("0.00");
             gpaOutput.setText(decimalFormat.format(finalGPA));
             setBackgroundOfGpaOutput(gpaOutput, finalGPA);
         });
@@ -78,13 +90,13 @@ public class GpaCalculatorPanel extends JPanel implements ActionListener{
         clearText.setBounds(120,545,100,40);
         clearText.setFocusable(false);
         clearText.addActionListener(e -> {
-            for (JTextField jTextField : grades) {
+            for (JTextField jTextField : classCredits) {
                 jTextField.setText("");
             }
         });
 
         for(int i = 0; i < 5; i++){
-            this.add(grades[i]);
+            this.add(classCredits[i]);
             this.add(listOfGrades[i]);
             this.add(removeClass[i]);
         }
@@ -114,14 +126,14 @@ public class GpaCalculatorPanel extends JPanel implements ActionListener{
         for(int i = 0; i < 5; i++){
             if(e.getSource()==removeClass[i]){
                 if(!isClassRemoved[i]){
-                    grades[i].setText("");
-                    grades[i].setEditable(false);
+                    classCredits[i].setText("");
+                    classCredits[i].setEditable(false);
                     isClassRemoved[i] = true;
-                    grades[i].setFocusable(false);
+                    classCredits[i].setFocusable(false);
                     removeClass[i].setText("+");
                 }else{
-                    grades[i].setEditable(true);
-                    grades[i].setFocusable(true);
+                    classCredits[i].setEditable(true);
+                    classCredits[i].setFocusable(true);
                     removeClass[i].setText("X");
                     isClassRemoved[i] = false;
                 }

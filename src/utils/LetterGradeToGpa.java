@@ -1,3 +1,5 @@
+package utils;
+
 public class LetterGradeToGpa {
 
     //convert index of combo box to grade(i.e index 0 at "A" = 4.0 gpa etc)
